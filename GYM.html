@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GORDEY GYM - Спортивный центр в Раменском</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Анимации */
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #FF6A00, 0 0 10px #FF6A00, 0 0 15px #FF6A00;
+            }
+            50% {
+                text-shadow: 0 0 10px #FF6A00, 0 0 20px #FF6A00, 0 0 30px #FF6A00;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: #FF6A00;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF6A00;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #FF6A00;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FF6A00;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out, glow 3s ease-in-out infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #FF6A00, #FF9440);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both, pulse 2s ease-in-out infinite;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 106, 0, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #FF6A00;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 106, 0, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(255, 106, 0, 0.2);
+            border-color: #FF6A00;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #FF6A00;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Trainers Section */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .trainer-card {
+            background: linear-gradient(145deg, rgba(255, 106, 0, 0.1), rgba(255, 148, 64, 0.1));
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 106, 0, 0.3);
+        }
+
+        .trainer-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 106, 0, 0.3);
+        }
+
+        .trainer-name {
+            color: #FF6A00;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 106, 0, 0.2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #FF6A00;
+            box-shadow: 0 10px 25px rgba(255, 106, 0, 0.2);
+        }
+
+        /* Prices Section */
+        .prices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .price-card {
+            background: linear-gradient(145deg, rgba(255, 106, 0, 0.1), rgba(255, 148, 64, 0.05));
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid rgba(255, 106, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: scale(1.05);
+            border-color: #FF6A00;
+            box-shadow: 0 15px 30px rgba(255, 106, 0, 0.3);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: #FF6A00;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 106, 0, 0.3);
+        }
+
+        .contact-card h3 {
+            color: #FF6A00;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">GORDEY GYM</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#trainers">Тренеры</a></li>
+                <li><a href="#prices">Цены</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <h1>GORDEY GYM</h1>
+        <p>Сила пространства. Свобода дыхания.</p>
+        <a href="#contact" class="cta-button">Записаться на тренировку</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section fade-in">
+        <h2>О нас</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏋️</div>
+                <h3>1000+ м²</h3>
+                <p>Просторный тренажёрный зал с профессиональным оборудованием без очередей</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🥇</div>
+                <h3>Чемпионы мира</h3>
+                <p>Тренировки под руководством чемпионов мира и мастеров спорта</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🕒</div>
+                <h3>06:30 - 00:00</h3>
+                <p>Работаем каждый день с раннего утра до поздней ночи</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section fade-in">
+        <h2>Услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Силовые тренировки</h3>
+                <p>Профессиональные тренажёры DHZ, свободные веса, пауэрлифтинг</p>
+            </div>
+            <div class="service-card">
+                <h3>Кардиозона</h3>
+                <p>Огромная кардиозона для эффективного жиросжигания</p>
+            </div>
+            <div class="service-card">
+                <h3>Групповые занятия</h3>
+                <p>Три зала для групповых программ, аэробика, танцы</p>
+            </div>
+            <div class="service-card">
+                <h3>Единоборства</h3>
+                <p>Отдельный этаж для дзюдо, ММА, бокса</p>
+            </div>
+            <div class="service-card">
+                <h3>SPA-зона</h3>
+                <p>Сауна, хаммам, солярий для полного расслабления</p>
+            </div>
+            <div class="service-card">
+                <h3>Детский фитнес</h3>
+                <p>Школа фитнеса для подростков 10-18 лет</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainers Section -->
+    <section id="trainers" class="section fade-in">
+        <h2>Наши тренеры</h2>
+        <div class="trainers-grid">
+            <div class="trainer-card">
+                <div class="trainer-name">Дмитрий Горбачев</div>
+                <p><strong>Владелец, Чемпион мира по пауэрлифтингу</strong></p>
+                <p>Рекорд: 360 кг в становой тяге. Многократный чемпион Европы</p>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-name">Андрей Калинин</div>
+                <p><strong>Призёр России по пауэрлифтингу</strong></p>
+                <p>Мастер спорта по становой тяге, КМС по дзюдо</p>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-name">Светлана</div>
+                <p><strong>Эксперт по групповым программам</strong></p>
+                <p>Специалист по аэробике, танцам и детскому фитнесу</p>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-name">Вячеслав Овчинников</div>
+                <p><strong>Тренер по единоборствам</strong></p>
+                <p>Чёрный пояс 3-й дан по джиу-джитсу, КМС по дзюдо и самбо</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prices Section -->
+    <section id="prices" class="section fade-in">
+        <h2>Цены</h2>
+        <div class="prices-grid">
+            <div class="price-card">
+                <h3>Месячный абонемент</h3>
+                <div class="price">от 2200₽</div>
+                <p>Полный доступ к залу и кардиозоне</p>
+                <p>Без очередей</p>
+            </div>
+            <div class="price-card">
+                <h3>Персональные тренировки</h3>
+                <div class="price">8000₽</div>
+                <p>10 занятий + месяц фитнеса в подарок</p>
+                <p>Индивидуальная программа</p>
+            </div>
+            <div class="price-card">
+                <h3>Студенческий тариф</h3>
+                <div class="price">скидка 30%</div>
+                <p>По студенческому билету</p>
+                <p>Все услуги зала</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+        <h2>Контакты</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3>Раменское, ул. Мира, 4</h3>
+                <p>Основной филиал</p>
+                <p>📞 +7 (985) 916-52-25</p>
+                <p>🕒 06:30 - 00:00</p>
+            </div>
+            <div class="contact-card">
+                <h3>Раменское, ул. Михалевича, 39к21</h3>
+                <p>ТЦ "Авиатор", 4 этаж</p>
+                <p>📞 +7 (926) 523-47-57</p>
+                <p>🕒 07:00 - 23:00</p>
+            </div>
+            <div class="contact-card">
+                <h3>Жуковский, ул. Анохина, 7А</h3>
+                <p>Дополнительная площадка</p>
+                <p>🕒 08:30 - 22:00</p>
+            </div>
+            <div class="contact-card">
+                <h3>Бронницы</h3>
+                <p>Филиал для жителей соседнего города</p>
+                <p>🕒 09:00 - 22:00</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 GORDEY GYM. Все права защищены.</p>
+        <p>Сила пространства. Свобода дыхания.</p>
+    </footer>
+
+    <script>
+        // Создание анимированных частиц
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Анимация появления элементов при скролле
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Плавная прокрутка для навигации
+        function smoothScroll() {
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            smoothScroll();
+            animateOnScroll();
+            
+            window.addEventListener('scroll', animateOnScroll);
+        });
+
+        // Дополнительные анимации для кнопок
+        document.querySelectorAll('.cta-button, .feature-card, .trainer-card, .price-card').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
