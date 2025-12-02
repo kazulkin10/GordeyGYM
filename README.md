@@ -50,6 +50,12 @@ pytest
   1. `cd frontend && npm install` (first time) then `npm run build`
   2. Commit the updated `docs/` artifacts and push `main`
 - Backend assets stay outside `docs/`; only the compiled frontend is published.
+- Merge/conflict tips when updating Pages artifacts:
+  - Keep `frontend/package.json` with the `build` script that writes into `../docs` and copies `404.html`.
+  - Keep `frontend/src/main.tsx` with `<BrowserRouter basename="/GordeyGYM/">` so routes work from Pages.
+  - Keep `frontend/vite.config.ts` with `base: '/GordeyGYM/'` and `outDir: '../docs'`.
+  - If conflicts arise in `docs/`, re-run `npm run build` after resolving the above source files; the generated assets will be recreated.
+  - `.gitattributes` marks `docs/` as generated (`-diff`) to reduce noisy diffs, but always commit fresh build output when publishing.
 
 ## Deployment notes
 - Build images via Dockerfiles in `backend/` and `frontend/`.

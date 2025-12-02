@@ -1,0 +1,3 @@
+# Treat generated static assets as generated to reduce noisy diffs/conflicts
+/docs/** linguist-generated
+/docs/** -diff
