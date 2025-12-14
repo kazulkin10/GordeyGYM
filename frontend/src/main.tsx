@@ -21,7 +21,7 @@ const theme = createTheme({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter basename="/GordeyGYM/">
+
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <App />

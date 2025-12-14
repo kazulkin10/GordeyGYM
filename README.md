@@ -42,20 +42,6 @@ pytest
 - API base configured via `VITE_API_URL` (defaults to `http://localhost:8000`)
 - Modern layout with sidebar navigation and dialogs for quick creation flows.
 
-### Temporary GitHub Pages hosting
-- The SPA is temporarily configured for GitHub Pages at `https://kazulkin10.github.io/GordeyGYM/`.
-- `frontend/vite.config.ts` sets `base: '/GordeyGYM/'` and builds to the repository-level `docs/` folder so Pages on the `main` branch can serve the static output.
-- `npm run build` (from `frontend/`) runs `vite build` and copies `docs/index.html` to `docs/404.html` for SPA routing fallback.
-- To refresh the hosted version:
-  1. `cd frontend && npm install` (first time) then `npm run build`
-  2. Commit the updated `docs/` artifacts and push `main`
-- Backend assets stay outside `docs/`; only the compiled frontend is published.
-- Merge/conflict tips when updating Pages artifacts:
-  - Keep `frontend/package.json` with the `build` script that writes into `../docs` and copies `404.html`.
-  - Keep `frontend/src/main.tsx` with `<BrowserRouter basename="/GordeyGYM/">` so routes work from Pages.
-  - Keep `frontend/vite.config.ts` with `base: '/GordeyGYM/'` and `outDir: '../docs'`.
-  - If conflicts arise in `docs/`, re-run `npm run build` after resolving the above source files; the generated assets will be recreated.
-  - `.gitattributes` marks `docs/` as generated (`-diff`) to reduce noisy diffs, but always commit fresh build output when publishing.
 
 ## Deployment notes
 - Build images via Dockerfiles in `backend/` and `frontend/`.
