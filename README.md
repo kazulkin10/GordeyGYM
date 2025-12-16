@@ -42,6 +42,7 @@ pytest
 - API base configured via `VITE_API_URL` (defaults to `http://localhost:8000`)
 - Modern layout with sidebar navigation and dialogs for quick creation flows.
 
+
 ## Deployment notes
 - Build images via Dockerfiles in `backend/` and `frontend/`.
 - Serve backend behind reverse proxy (TLS termination) and point frontend to the API host.
